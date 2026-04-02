@@ -12,16 +12,43 @@ const NAV_LINKS = [
   { href: "#contacts", label: "Контакты" },
 ];
 
-const FOR_WHOM_ITEMS = [
-  { icon: "Heart", text: "Вы ищете поддержку и хотите быть услышанными" },
-  { icon: "Brain", text: "Хотите лучше понимать себя и свои реакции" },
-  { icon: "Users", text: "Вам важен контакт с живыми людьми в безопасной среде" },
-  { icon: "Sparkles", text: "Хотите изменить что-то в своей жизни, но не знаете с чего начать" },
-  { icon: "Wind", text: "Чувствуете тревогу, усталость или ощущение застревания" },
-  { icon: "Leaf", text: "Просто хотите замедлиться и побыть с собой летом" },
+const ABOUT_CARDS = [
+  {
+    icon: "Shield",
+    title: "Безопасное пространство",
+    text: "Можно снять маски, никому не соответствовать, не подбирать идеальные слова — а пробовать говорить о важном.",
+  },
+  {
+    icon: "Flame",
+    title: "Живой, настоящий процесс",
+    text: "Можно смеяться и плакать, быть живыми и настоящими, говорить о сложном опыте, о боли и о радости.",
+  },
+  {
+    icon: "Leaf",
+    title: "Право на конфликт и паузу",
+    text: "Можно поспорить и даже поругаться, но остаться вместе — разными, с интересом к этой разности и друг к другу.",
+  },
 ];
 
-function useInView(threshold = 0.15) {
+const FOR_WHOM_ITEMS = [
+  { icon: "Heart", text: "Хотите встретиться с собой и встретиться с другими" },
+  { icon: "MessageCircle", text: "Ищете пространство, где не нужно подбирать идеальные слова" },
+  { icon: "Users", text: "Хотите попробовать новое в общении, не теряя поддержки" },
+  { icon: "Sparkles", text: "Цените искренность и не боитесь сложных чувств" },
+  { icon: "Wind", text: "Хотите встретиться с тем, что происходит в вашей жизни прямо сейчас" },
+  { icon: "BookOpen", text: "Нужны часы для учёты — 35 часов, эквивалент годичной группы" },
+];
+
+const SCHEDULE = [
+  { day: "25 июня", label: "День 1", active: true },
+  { day: "26 июня", label: "День 2", active: true },
+  { day: "27 июня", label: "День 3", active: true },
+  { day: "28 июня", label: "Выходной", active: false },
+  { day: "29 июня", label: "День 4", active: true },
+  { day: "30 июня", label: "День 5", active: true },
+];
+
+function useInView(threshold = 0.12) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -85,10 +112,7 @@ export default function Index() {
 
       {/* HERO */}
       <div id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: `url(${HERO_BG})` }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center opacity-20" style={{ backgroundImage: `url(${HERO_BG})` }} />
         <div className="absolute inset-0 watercolor-bg" />
         <div className="relative z-10 text-center px-6 max-w-3xl mx-auto animate-fade-up" style={{ animationDelay: '200ms' }}>
           <p className="text-sage-500 font-golos text-sm uppercase tracking-[0.25em] mb-4">
@@ -98,7 +122,7 @@ export default function Index() {
             Летняя<br /><em className="text-primary not-italic">палитра</em>
           </h1>
           <p className="text-foreground/70 text-lg md:text-xl font-light leading-relaxed mb-10 max-w-xl mx-auto">
-            Летняя динамическая психотерапевтическая группа — место, где можно принести любую тему, которая вас волнует
+            Летняя динамическая терапевтическая группа — место, где можно принести любую тему, которая вас волнует
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="#about" className="bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-base hover:bg-sage-600 transition-all hover:scale-105">
@@ -109,42 +133,43 @@ export default function Index() {
             </a>
           </div>
         </div>
-
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
           <Icon name="ChevronDown" size={28} className="text-sage-400" />
         </div>
       </div>
 
-      {/* POSTER STRIP */}
+      {/* INTRO */}
       <div className="py-16 px-6 bg-white/50">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-10">
           <div className="flex-shrink-0">
-            <img
-              src={POSTER}
-              alt="Летняя палитра"
-              className="w-64 md:w-80 rounded-2xl shadow-lg object-cover"
-            />
+            <img src={POSTER} alt="Летняя палитра" className="w-64 md:w-72 rounded-2xl shadow-lg object-cover" />
           </div>
           <div>
-            <p className="font-cormorant text-4xl font-light text-foreground mb-4 leading-snug">
-              Эта группа обо всём,<br />что случается в жизни
+            <p className="font-cormorant text-4xl font-light text-foreground mb-5 leading-snug">
+              Эта группа обо всём,<br />что случается в нашей жизни
             </p>
-            <p className="text-foreground/60 text-base leading-relaxed mb-6">
-              Вы можете принести любую тему — радость и тревогу, отношения и потери, вопросы о себе и о будущем.
-              В группе нет правильных тем. Есть только ваш живой опыт и безопасное пространство для его исследования.
+            <p className="text-foreground/65 text-base leading-relaxed mb-4">
+              Вы можете приносить любую тему, которая вас волнует.
             </p>
-            <div className="flex flex-wrap gap-6 text-sm text-sage-500 font-golos">
+            <p className="text-foreground/65 text-base leading-relaxed mb-6">
+              Мы умеем создавать атмосферу группы, в которой многое возможно. Возможно встретиться с собой и встретиться с другими.
+            </p>
+            <div className="flex flex-wrap gap-5 text-sm text-sage-500 font-golos">
               <div className="flex items-center gap-2">
-                <Icon name="Calendar" size={16} />
+                <Icon name="Calendar" size={15} />
                 <span>25–30 июня</span>
               </div>
               <div className="flex items-center gap-2">
-                <Icon name="MapPin" size={16} />
+                <Icon name="Clock" size={15} />
+                <span>11:00–18:00</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Icon name="MapPin" size={15} />
                 <span>Новосибирск</span>
               </div>
               <div className="flex items-center gap-2">
-                <Icon name="Users" size={16} />
-                <span>Малая группа</span>
+                <Icon name="BookOpen" size={15} />
+                <span>35 часов</span>
               </div>
             </div>
           </div>
@@ -153,28 +178,15 @@ export default function Index() {
 
       {/* ABOUT */}
       <Section id="about" className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-sage-500 text-sm uppercase tracking-widest mb-3">О группе</p>
-          <h2 className="font-cormorant text-5xl font-light text-foreground mb-8">Что такое динамическая группа?</h2>
-          <div className="leaf-divider w-24 mx-auto mb-12" />
-          <div className="grid md:grid-cols-3 gap-8 text-left">
-            {[
-              {
-                icon: "Shield",
-                title: "Безопасное пространство",
-                text: "Группа работает по принципам конфиденциальности и взаимного уважения. Всё, что здесь звучит, остаётся внутри.",
-              },
-              {
-                icon: "Zap",
-                title: "Живой процесс",
-                text: "Динамическая группа — это живой контакт людей. Именно здесь, в отношениях с другими, происходят самые глубокие изменения.",
-              },
-              {
-                icon: "Leaf",
-                title: "Летний формат",
-                text: "Пять встреч, каждая — новая тема, новый уровень глубины. Компактно, интенсивно, с заботой о каждом участнике.",
-              },
-            ].map((item) => (
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-14">
+            <p className="text-sage-500 text-sm uppercase tracking-widest mb-3">О группе</p>
+            <h2 className="font-cormorant text-5xl font-light text-foreground mb-6">Мы ценим искренность</h2>
+            <div className="leaf-divider w-24 mx-auto" />
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-14">
+            {ABOUT_CARDS.map((item) => (
               <div key={item.title} className="bg-white/70 rounded-2xl p-6 border border-sage-100">
                 <div className="w-10 h-10 bg-mint-100 rounded-full flex items-center justify-center mb-4">
                   <Icon name={item.icon} fallback="Leaf" size={20} className="text-primary" />
@@ -183,6 +195,21 @@ export default function Index() {
                 <p className="text-foreground/60 text-sm leading-relaxed">{item.text}</p>
               </div>
             ))}
+          </div>
+
+          <div className="bg-mint-50 rounded-3xl p-8 md:p-10 border border-mint-100">
+            <p className="font-cormorant text-2xl font-light text-foreground mb-4 leading-relaxed">
+              «Мы не боимся сложных чувств и поддерживаем право на конфликт, молчание, паузу, ошибку»
+            </p>
+            <p className="text-foreground/60 text-base leading-relaxed mb-4">
+              С нами можно пробовать новое в общении, не теряя поддержки и оставаясь в безопасном пространстве.
+              Мы любим группы, нам нравится быть участниками и ведущими, опираясь на профессиональный опыт,
+              а ещё — на живой интерес к групповому процессу и друг к другу как коллегам, со-ведущим.
+            </p>
+            <p className="text-foreground/60 text-base leading-relaxed">
+              Если вы ищете пространство, где можно снять маски, никому не соответствовать,
+              не подбирать идеальные слова, а пробовать говорить о важном — <strong className="text-foreground/80">возможно, это оно.</strong>
+            </p>
           </div>
         </div>
       </Section>
@@ -195,28 +222,48 @@ export default function Index() {
             <h2 className="font-cormorant text-5xl font-light text-foreground">Кто проведёт группу</h2>
             <div className="leaf-divider w-24 mx-auto mt-6" />
           </div>
-          <div className="grid md:grid-cols-2 gap-10">
+          <div className="grid md:grid-cols-2 gap-8">
             {[
               {
-                name: "Сухорукова Наталья",
-                role: "Психотерапевт, ведущая группы",
-                desc: "Опыт в индивидуальной и групповой терапии. Работает с тревогой, отношениями, самопониманием. Создаёт пространство, в котором можно быть собой.",
+                name: "Юлия Воропаева",
+                phone: "+7 913 746-59-08",
+                creds: [
+                  "Аккредитованный гештальт-терапевт",
+                  "Семейный системный терапевт",
+                  "Супервизор",
+                  "Ведущий групп",
+                ],
               },
               {
-                name: "Воропаева Юлия",
-                role: "Психотерапевт, ведущая группы",
-                desc: "Специализируется на групповой динамике и телесно-ориентированных подходах. Помогает участникам обнаружить новые ресурсы через контакт с группой.",
+                name: "Наталья Сухорукова",
+                phone: "+7 905 957-70-62",
+                creds: [
+                  "Аккредитованный гештальт-терапевт",
+                  "Ведущий групп",
+                  "Семейный системный терапевт",
+                ],
               },
             ].map((leader) => (
-              <div key={leader.name} className="bg-white rounded-2xl p-8 border border-sage-100 shadow-sm flex gap-6 items-start">
-                <div className="w-16 h-16 bg-mint-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Icon name="User" size={28} className="text-primary" />
+              <div key={leader.name} className="bg-white rounded-2xl p-8 border border-sage-100 shadow-sm">
+                <div className="flex items-center gap-5 mb-5">
+                  <div className="w-14 h-14 bg-mint-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Icon name="User" size={26} className="text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-cormorant text-2xl font-medium">{leader.name}</h3>
+                    <a href={`tel:${leader.phone.replace(/\s/g, "")}`} className="text-sage-500 text-sm hover:text-primary transition-colors">
+                      {leader.phone}
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-cormorant text-2xl font-medium mb-1">{leader.name}</h3>
-                  <p className="text-sage-500 text-sm mb-3">{leader.role}</p>
-                  <p className="text-foreground/60 text-sm leading-relaxed">{leader.desc}</p>
-                </div>
+                <ul className="space-y-2">
+                  {leader.creds.map((c) => (
+                    <li key={c} className="flex items-center gap-2 text-sm text-foreground/60">
+                      <Icon name="Check" size={14} className="text-primary flex-shrink-0" />
+                      {c}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
@@ -246,32 +293,60 @@ export default function Index() {
 
       {/* PRICE */}
       <Section id="price" className="py-20 px-6 bg-sage-50/40">
-        <div className="max-w-2xl mx-auto text-center">
-          <p className="text-sage-500 text-sm uppercase tracking-widest mb-3">Стоимость</p>
-          <h2 className="font-cormorant text-5xl font-light text-foreground mb-4">Участие в группе</h2>
-          <div className="leaf-divider w-24 mx-auto mb-12" />
-
-          <div className="bg-white rounded-3xl border border-sage-100 shadow-sm p-10 mb-6">
-            <div className="font-cormorant text-7xl font-light text-primary mb-2">—</div>
-            <p className="text-foreground/50 text-sm mb-6">Стоимость уточняется — напишите нам</p>
-            <div className="space-y-3 text-left max-w-xs mx-auto mb-8">
-              {[
-                "5 групповых встреч",
-                "Опытные ведущие",
-                "Малая группа (до 10 человек)",
-                "г. Новосибирск, 25–30 июня",
-              ].map((f) => (
-                <div key={f} className="flex items-center gap-3 text-sm text-foreground/70">
-                  <Icon name="Check" size={16} className="text-primary flex-shrink-0" />
-                  <span>{f}</span>
-                </div>
-              ))}
-            </div>
-            <a href="#contacts" className="inline-block bg-primary text-primary-foreground px-10 py-3.5 rounded-full text-base hover:bg-sage-600 transition-all hover:scale-105">
-              Записаться
-            </a>
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-14">
+            <p className="text-sage-500 text-sm uppercase tracking-widest mb-3">Стоимость и формат</p>
+            <h2 className="font-cormorant text-5xl font-light text-foreground">Участие в группе</h2>
+            <div className="leaf-divider w-24 mx-auto mt-6" />
           </div>
-          <p className="text-foreground/40 text-xs">Количество мест ограничено</p>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Price card */}
+            <div className="bg-white rounded-3xl border border-sage-100 shadow-sm p-8 flex flex-col">
+              <div className="flex-1">
+                <p className="text-foreground/50 text-sm uppercase tracking-wider mb-2">Стоимость</p>
+                <div className="font-cormorant text-6xl font-light text-primary mb-1">25 000 ₽</div>
+                <p className="text-foreground/50 text-sm mb-7">за полный курс — 5 дней, 35 часов</p>
+                <ul className="space-y-3 mb-8">
+                  {[
+                    "Эквивалент годичной группы",
+                    "Часы идут в учётную запись",
+                    "Собеседование перед группой обязательно",
+                    "Предоплата для подтверждения места",
+                    "Пропуски оплачиваются",
+                  ].map((f) => (
+                    <li key={f} className="flex items-start gap-3 text-sm text-foreground/65">
+                      <Icon name="Check" size={15} className="text-primary flex-shrink-0 mt-0.5" />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <a href="#contacts" className="block text-center bg-primary text-primary-foreground py-3.5 rounded-xl text-base font-medium hover:bg-sage-600 transition-all hover:scale-[1.02]">
+                Записаться
+              </a>
+            </div>
+
+            {/* Schedule card */}
+            <div className="bg-white rounded-3xl border border-sage-100 shadow-sm p-8">
+              <p className="text-foreground/50 text-sm uppercase tracking-wider mb-2">Расписание</p>
+              <p className="font-cormorant text-2xl font-light text-foreground mb-1">11:00 — 18:00</p>
+              <p className="text-foreground/50 text-sm mb-7">ежедневно, г. Новосибирск</p>
+              <div className="grid grid-cols-3 gap-3">
+                {SCHEDULE.map((s) => (
+                  <div key={s.day} className={`rounded-xl p-3 text-center border ${s.active ? "bg-mint-50 border-mint-200" : "bg-gray-50 border-gray-100"}`}>
+                    <p className={`text-xs font-medium mb-0.5 ${s.active ? "text-primary" : "text-foreground/30"}`}>{s.label}</p>
+                    <p className={`text-sm ${s.active ? "text-foreground/70" : "text-foreground/25"}`}>{s.day}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 p-4 bg-sage-50 rounded-xl border border-sage-100">
+                <p className="text-sm text-foreground/60 leading-relaxed">
+                  <strong className="text-foreground/80">5 дней с одним выходным</strong> — 35 часов интенсивной работы, эквивалентных годичной группе
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </Section>
 
@@ -279,46 +354,37 @@ export default function Index() {
       <Section id="contacts" className="py-20 px-6">
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-sage-500 text-sm uppercase tracking-widest mb-3">Контакты</p>
-          <h2 className="font-cormorant text-5xl font-light text-foreground mb-4">Запишитесь в группу</h2>
+          <h2 className="font-cormorant text-5xl font-light text-foreground mb-4">Запись в группу</h2>
           <div className="leaf-divider w-24 mx-auto mb-10" />
 
-          <div className="bg-white rounded-3xl border border-sage-100 shadow-sm p-10">
+          <div className="bg-white rounded-3xl border border-sage-100 shadow-sm p-8 md:p-10">
             <p className="text-foreground/60 text-base mb-8 leading-relaxed">
-              Оставьте заявку и мы свяжемся с вами, ответим на вопросы и расскажем подробнее о группе
+              Перед участием проводится обязательное собеседование. Напишите или позвоните — мы ответим на вопросы и договоримся об удобном времени
             </p>
 
-            <form className="space-y-4 text-left" onSubmit={(e) => e.preventDefault()}>
-              <div>
-                <label className="text-sm text-foreground/60 mb-1.5 block">Ваше имя</label>
-                <input
-                  type="text"
-                  placeholder="Как вас зовут?"
-                  className="w-full border border-sage-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary bg-cream/50 transition-colors"
-                />
-              </div>
-              <div>
-                <label className="text-sm text-foreground/60 mb-1.5 block">Телефон или Telegram</label>
-                <input
-                  type="text"
-                  placeholder="+7 или @username"
-                  className="w-full border border-sage-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary bg-cream/50 transition-colors"
-                />
-              </div>
-              <div>
-                <label className="text-sm text-foreground/60 mb-1.5 block">Вопрос или комментарий (необязательно)</label>
-                <textarea
-                  rows={3}
-                  placeholder="Что хотите спросить или уточнить?"
-                  className="w-full border border-sage-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary bg-cream/50 transition-colors resize-none"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-primary text-primary-foreground py-3.5 rounded-xl text-base font-medium hover:bg-sage-600 transition-all hover:scale-[1.01]"
-              >
-                Отправить заявку
-              </button>
-            </form>
+            <div className="grid sm:grid-cols-2 gap-5 mb-8">
+              {[
+                { name: "Юлия Воропаева", phone: "+7 913 746-59-08", href: "tel:+79137465908" },
+                { name: "Наталья Сухорукова", phone: "+7 905 957-70-62", href: "tel:+79059577062" },
+              ].map((c) => (
+                <a key={c.name} href={c.href} className="flex items-center gap-4 p-4 rounded-2xl border border-sage-100 hover:border-primary hover:bg-mint-50 transition-all group">
+                  <div className="w-10 h-10 bg-mint-100 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
+                    <Icon name="Phone" size={18} className="text-primary" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-sm font-medium text-foreground/80">{c.name}</p>
+                    <p className="text-primary text-sm">{c.phone}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            <div className="border-t border-sage-100 pt-6">
+              <p className="text-foreground/40 text-xs text-center flex items-center justify-center gap-2">
+                <Icon name="MapPin" size={13} />
+                г. Новосибирск · 25–30 июня 2025 · 11:00–18:00
+              </p>
+            </div>
           </div>
         </div>
       </Section>
@@ -326,7 +392,7 @@ export default function Index() {
       {/* FOOTER */}
       <footer className="py-8 px-6 border-t border-sage-100 text-center">
         <p className="font-cormorant text-lg text-sage-500 mb-1">🌿 Летняя палитра</p>
-        <p className="text-foreground/40 text-xs">25–30 июня · Новосибирск</p>
+        <p className="text-foreground/40 text-xs">25–30 июня · Новосибирск · 11:00–18:00</p>
       </footer>
     </div>
   );
