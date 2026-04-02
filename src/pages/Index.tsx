@@ -223,8 +223,8 @@ export default function Index() {
               {
                 name: "Юлия Воропаева",
                 phone: "+7 913 746-59-08",
-                photo: "https://cdn.poehali.dev/projects/5bc08220-2e4f-45b0-abb4-ce47a6e49500/bucket/399332c8-1cdb-4e8c-aca8-c240da3808bf.jpeg",
-                photoPos: "80% 10%",
+                photo: "https://cdn.poehali.dev/projects/5bc08220-2e4f-45b0-abb4-ce47a6e49500/bucket/8b9504f1-6b2b-4479-be64-775fb5ebf418.jpeg",
+                photoPos: "50% 15%",
                 creds: [
                   "Аккредитованный гештальт-терапевт",
                   "Семейный системный терапевт",
@@ -235,8 +235,8 @@ export default function Index() {
               {
                 name: "Наталья Сухорукова",
                 phone: "+7 905 957-70-62",
-                photo: "https://cdn.poehali.dev/projects/5bc08220-2e4f-45b0-abb4-ce47a6e49500/bucket/399332c8-1cdb-4e8c-aca8-c240da3808bf.jpeg",
-                photoPos: "18% 10%",
+                photo: "https://cdn.poehali.dev/projects/5bc08220-2e4f-45b0-abb4-ce47a6e49500/bucket/f30090b9-ea48-45c3-9809-c3bb2481d33c.jpeg",
+                photoPos: "50% 15%",
                 creds: [
                   "Аккредитованный гештальт-терапевт",
                   "Ведущий групп",
