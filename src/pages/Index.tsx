@@ -223,6 +223,8 @@ export default function Index() {
               {
                 name: "Юлия Воропаева",
                 phone: "+7 913 746-59-08",
+                photo: "https://cdn.poehali.dev/projects/5bc08220-2e4f-45b0-abb4-ce47a6e49500/bucket/399332c8-1cdb-4e8c-aca8-c240da3808bf.jpeg",
+                photoPos: "80% 10%",
                 creds: [
                   "Аккредитованный гештальт-терапевт",
                   "Семейный системный терапевт",
@@ -233,6 +235,8 @@ export default function Index() {
               {
                 name: "Наталья Сухорукова",
                 phone: "+7 905 957-70-62",
+                photo: "https://cdn.poehali.dev/projects/5bc08220-2e4f-45b0-abb4-ce47a6e49500/bucket/399332c8-1cdb-4e8c-aca8-c240da3808bf.jpeg",
+                photoPos: "18% 10%",
                 creds: [
                   "Аккредитованный гештальт-терапевт",
                   "Ведущий групп",
@@ -242,8 +246,13 @@ export default function Index() {
             ].map((leader) => (
               <div key={leader.name} className="bg-white rounded-2xl p-8 border border-sage-100 shadow-sm">
                 <div className="flex items-center gap-5 mb-5">
-                  <div className="w-14 h-14 bg-mint-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Icon name="User" size={26} className="text-primary" />
+                  <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-mint-200">
+                    <img
+                      src={leader.photo}
+                      alt={leader.name}
+                      className="w-full h-full object-cover"
+                      style={{ objectPosition: leader.photoPos }}
+                    />
                   </div>
                   <div>
                     <h3 className="font-cormorant text-2xl font-medium">{leader.name}</h3>
