@@ -244,29 +244,31 @@ export default function Index() {
                 ],
               },
             ].map((leader) => (
-              <div key={leader.name} className="bg-white rounded-2xl overflow-hidden border border-sage-100 shadow-sm">
-                <div className="h-72 overflow-hidden">
-                  <img
-                    src={leader.photo}
-                    alt={leader.name}
-                    className="w-full h-full object-cover"
-                    style={{ objectPosition: leader.photoPos }}
-                  />
+              <div key={leader.name} className="bg-white rounded-2xl p-7 border border-sage-100 shadow-sm">
+                <div className="flex items-center gap-5 mb-5">
+                  <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 border-2 border-mint-200">
+                    <img
+                      src={leader.photo}
+                      alt={leader.name}
+                      className="w-full h-full object-cover"
+                      style={{ objectPosition: leader.photoPos }}
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-cormorant text-2xl font-medium mb-1">{leader.name}</h3>
+                    <a href={`tel:${leader.phone.replace(/\s/g, "")}`} className="text-sage-500 text-sm hover:text-primary transition-colors block">
+                      {leader.phone}
+                    </a>
+                  </div>
                 </div>
-                <div className="p-7">
-                  <h3 className="font-cormorant text-2xl font-medium mb-1">{leader.name}</h3>
-                  <a href={`tel:${leader.phone.replace(/\s/g, "")}`} className="text-sage-500 text-sm hover:text-primary transition-colors block mb-5">
-                    {leader.phone}
-                  </a>
-                  <ul className="space-y-2">
-                    {leader.creds.map((c) => (
-                      <li key={c} className="flex items-center gap-2 text-sm text-foreground/60">
-                        <Icon name="Check" size={14} className="text-primary flex-shrink-0" />
-                        {c}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <ul className="space-y-2">
+                  {leader.creds.map((c) => (
+                    <li key={c} className="flex items-center gap-2 text-sm text-foreground/60">
+                      <Icon name="Check" size={14} className="text-primary flex-shrink-0" />
+                      {c}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
