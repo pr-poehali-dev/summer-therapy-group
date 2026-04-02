@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
 
 const HERO_BG = "https://cdn.poehali.dev/projects/5bc08220-2e4f-45b0-abb4-ce47a6e49500/files/3d5a51fa-a2d5-4a5b-8475-10d4045e561b.jpg";
-const POSTER = "https://cdn.poehali.dev/projects/5bc08220-2e4f-45b0-abb4-ce47a6e49500/bucket/805ffb82-8b59-48ae-931c-eb622bd79bc5.jpeg";
 
 const NAV_LINKS = [
   { href: "#about", label: "О группе" },
@@ -140,10 +139,7 @@ export default function Index() {
 
       {/* INTRO */}
       <div className="py-16 px-6 bg-white/50">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-10">
-          <div className="flex-shrink-0">
-            <img src={POSTER} alt="Летняя палитра" className="w-64 md:w-72 rounded-2xl shadow-lg object-cover" />
-          </div>
+        <div className="max-w-3xl mx-auto">
           <div>
             <p className="font-cormorant text-4xl font-light text-foreground mb-5 leading-snug">
               Эта группа обо всём,<br />что случается в нашей жизни
